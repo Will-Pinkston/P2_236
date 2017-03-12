@@ -19,6 +19,18 @@ datalogProgram::datalogProgram()
     querySwitch = false;
 }
 
+bool datalogProgram::addToken2(std::string inToken)
+{
+    if (currentPredicate == NULL)
+    {
+        currentPredicate = new predicate(inToken);
+        return true;
+    }
+    
+    if (currentPredicate->addParam(inToken)) return true;
+    
+    return false;
+}
 
 bool datalogProgram::addToken(std::string inToken)
 {
@@ -35,19 +47,6 @@ bool datalogProgram::addToken(std::string inToken)
         }
         if (currentRule->addParam(inToken)) return true;
     }
-    return false;
-}
-
-bool datalogProgram::addToken2(std::string inToken)
-{
-    if (currentPredicate == NULL)
-    {
-        currentPredicate = new predicate(inToken);
-        return true;
-    }
-    
-    if (currentPredicate->addParam(inToken)) return true;
-    
     return false;
 }
 

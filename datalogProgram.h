@@ -23,6 +23,7 @@ class datalogProgram {
 public:
     datalogProgram();
     bool addToken(std::string inToken);
+    bool addToken2(std::string inToken);
     
     bool setScheme();
     bool setFact();

@@ -59,11 +59,11 @@ void parser::printDomain()
 
 bool parser::run()
 {
-    bool parse_program;
+//    bool parse_program;
     
     try
     {
-        parse_program = _datalogProgram();
+        _datalogProgram();
     }
     catch (std::string fault)
     {
