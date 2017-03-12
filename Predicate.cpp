@@ -107,6 +107,7 @@ bool predicate::fillExpression2(std::string tokenName)
         }
         else return true;
     }
+    return false;
 }
 
 std::string predicate::toString()
