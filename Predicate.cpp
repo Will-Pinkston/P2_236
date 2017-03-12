@@ -67,11 +67,6 @@ bool predicate::fillExpression(std::string tokenName, std::string tokenContents)
     {
         return false;
     }
-    if (tokenName == "LEFT_PAREN")
-    {
-        parenCount++;
-        return openExpression->addExpression();
-    }
     if (tokenName == "ID")
     {
         return openExpression->addID(tokenContents);
@@ -79,6 +74,17 @@ bool predicate::fillExpression(std::string tokenName, std::string tokenContents)
     if (tokenName == "STRING")
     {
         return openExpression->addString(tokenContents);
+    }
+    
+    return fillExpression2(tokenName);
+}
+
+bool predicate::fillExpression2(std::string tokenName)
+{
+    if (tokenName == "LEFT_PAREN")
+    {
+        parenCount++;
+        return openExpression->addExpression();
     }
     if (tokenName == "ADD")
     {
@@ -95,15 +101,13 @@ bool predicate::fillExpression(std::string tokenName, std::string tokenContents)
         {
             expressionSwitch = predicate::off;
             parameterList.push(openExpression);
-//            delete openExpression;
+            //            delete openExpression;
             openExpression = NULL;
             return true;
         }
         else return true;
     }
-    return false;
 }
-
 
 std::string predicate::toString()
 {

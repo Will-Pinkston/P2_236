@@ -22,6 +22,7 @@ public:
     predicate(std::string initId);
     bool addParam(std::string paramToken);
     bool fillExpression(std::string tokenName, std::string tokenContents);
+    bool fillExpression2(std::string tokenName);
     std::string toString();
 private:
     std::string _Id;
