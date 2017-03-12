@@ -70,23 +70,23 @@ bool predicate::fillExpression(std::string tokenName, std::string tokenContents)
     if (tokenName == "LEFT_PAREN")
     {
         parenCount++;
-        if (openExpression->addExpression()) return true;
+        return openExpression->addExpression();
     }
     if (tokenName == "ID")
     {
-        if (openExpression->addID(tokenContents)) return true;
+        return openExpression->addID(tokenContents);
     }
     if (tokenName == "STRING")
     {
-        if (openExpression->addString(tokenContents)) return true;
+        return openExpression->addString(tokenContents);
     }
     if (tokenName == "ADD")
     {
-        if (openExpression->addOperator('+')) return true;
+        return openExpression->addOperator('+');
     }
     if (tokenName == "MULTIPLY")
     {
-        if (openExpression->addOperator('*')) return true;
+        return openExpression->addOperator('*');
     }
     if (tokenName == "RIGHT_PAREN")
     {
