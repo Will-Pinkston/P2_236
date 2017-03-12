@@ -82,7 +82,7 @@ bool parser::run()
 //------------------------------------------------------------------------
 //methods represent each rule in the grammar
 
-bool parser::_datalogProgram()
+bool parser::schemeHelper()
 {
     getCurrentToken();
     if (_Current_Token != "SCHEMES")
@@ -100,18 +100,11 @@ bool parser::_datalogProgram()
         return false;
     }
     
-    bool testSchemes = (_scheme() && _schemeList());
-    
-    _Tokens.pop();
-    getCurrentToken();
-    if (_Current_Token != "COLON")
-    {
-        throw _Tokens.top();
-        return false;
-    }
-    
-    bool testFacts = _factList();
+    return (_scheme() && _schemeList());
+}
 
+bool parser::factHelper()
+{
     _Tokens.pop();
     getCurrentToken();
     if (_Current_Token != "COLON")
@@ -120,8 +113,11 @@ bool parser::_datalogProgram()
         return false;
     }
     
-    bool testRules = _ruleList();
+    return _factList();
+}
 
+bool parser::ruleHelper()
+{
     _Tokens.pop();
     getCurrentToken();
     if (_Current_Token != "COLON")
@@ -130,9 +126,33 @@ bool parser::_datalogProgram()
         return false;
     }
     
-    bool testQueries = (_query() && _queryList());
+    return _ruleList();
+}
+
+bool parser::queryHelper()
+{
+    _Tokens.pop();
+    getCurrentToken();
+    if (_Current_Token != "COLON")
+    {
+        throw _Tokens.top();
+        return false;
+    }
     
-    return (testSchemes && testFacts && testRules && testQueries);
+    return (_query() && _queryList());
+}
+
+bool parser::_datalogProgram()
+{
+    bool schemes = schemeHelper();
+    
+    bool facts = factHelper();
+
+    bool rules = ruleHelper();
+
+    bool queries = queryHelper();
+    
+    return (schemes && facts && rules && queries);
 }
 
 bool parser::_scheme()

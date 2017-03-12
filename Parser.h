@@ -31,6 +31,12 @@ public:
     bool run();
     
     bool _datalogProgram();
+    
+    bool schemeHelper();
+    bool factHelper();
+    bool ruleHelper();
+    bool queryHelper();
+    
     bool _scheme();
     bool _schemeList();
     bool _idList();
