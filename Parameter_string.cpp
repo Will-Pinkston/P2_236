@@ -6,7 +6,7 @@
 //  Copyright © 2017 Xunil_programming. All rights reserved.
 //
 
-#include "Parameter_String.h"
+#include "Parameter_string.h"
 parameter_string::parameter_string(std::string inParam)
 {
     _type = "STRING";
